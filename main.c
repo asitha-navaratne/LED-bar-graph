@@ -4,11 +4,11 @@
 #include <math.h>
 #include <util/delay.h>
 
-#define SHIFT_DDR	DDRB			///< DDR of 74HC595 shift register.
-#define SHIFT_PORT	PORTB			///< Port of shift register.
-#define SHIFT_PIN	PB0				///< Pin for shift register clock.
-#define LATCH_PIN	PB2				///< Pin for storage register clock.
-#define DATA_PIN	PB1				///< Pin for sending serial data to shift register.
+#define SHIFT_DDR	DDRB						///< DDR of 74HC595 shift register.
+#define SHIFT_PORT	PORTB						///< Port of shift register.
+#define SHIFT_PIN	PB0						///< Pin for shift register clock.
+#define LATCH_PIN	PB2						///< Pin for storage register clock.
+#define DATA_PIN	PB1						///< Pin for sending serial data to shift register.
 
 void PORT_INIT(void);
 void ADC_INIT(void);
@@ -38,9 +38,9 @@ int main(void){
 			else{
 				SHIFT_PORT &= ~(1<<DATA_PIN);
 			}
-			SERIAL_PULSE();							///< Send the number to the shift register serially.
+			SERIAL_PULSE();					///< Send the number to the shift register serially.
 		}
-		LATCH_PULSE();								///< Output data in the shift register (parallelly).
+		LATCH_PULSE();						///< Output data in the shift register (parallelly).
 	}
 }
 
@@ -57,8 +57,8 @@ void PORT_INIT(void){
  */
 
 void ADC_INIT(void){
-	ADMUX = (1<<REFS0);								///< Set ADC reference to AVCC and analog input mode to single ended input of ADC0.
-	ADCSRA = ((1<<ADEN)|(1<<ADPS2)|(1<<ADPS1));		///< Enable ADC and set ADC prescalar to 64.
+	ADMUX = (1<<REFS0);						///< Set ADC reference to AVCC and analog input mode to single ended input of ADC0.
+	ADCSRA = ((1<<ADEN)|(1<<ADPS2)|(1<<ADPS1));			///< Enable ADC and set ADC prescalar to 64.
 }
 
 /*!
@@ -67,9 +67,9 @@ void ADC_INIT(void){
  */
 
 uint16_t ADC_CONVERSION(void){
-	ADCSRA |= (1<<ADSC);								///< Start ADC conversion.
-	while(ADCSRA & (1<<ADSC));							///< Wait until conversion is complete.
-	return ADC;											///< Return result of conversion.
+	ADCSRA |= (1<<ADSC);						///< Start ADC conversion.
+	while(ADCSRA & (1<<ADSC));					///< Wait until conversion is complete.
+	return ADC;							///< Return result of conversion.
 }
 
 /*!
